@@ -4,6 +4,8 @@ environment:
     matrix:
       - PRJ_GEN: "Visual Studio 15 2017"
         BDIR: msvc2017
+        VS_VER: 15
+        ARCH: x86
         PRJ_CFG: Release
         OPENSSL: OFF
         TESTING: ON
@@ -20,3 +22,7 @@ build_script:
     - cd build.%BDIR%
     - cmake .. -G"%PRJ_GEN%" -DCMAKE_USE_OPENSSL=%OPENSSL% -DCURL_STATICLIB=%STATICLIB% -DBUILD_TESTING=%TESTING% -DCURL_WERROR=ON
     - cmake --build . --config %PRJ_CFG% --clean-first
+
+artifacts:
+    - path: 'build.$(BDIR)/lib/$(PRJ_CFG)'
+      name: '$(APPVEYOR_REPO_BRANCH)-$(PRJ_CFG)-$(ARCH)-vc$(VSVER)-build_$(APPVEYOR_BUILD_VERSION)'
