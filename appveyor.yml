@@ -9,6 +9,12 @@ environment:
         TESTING: ON
         STATICLIB: OFF
 
+image: Visual Studio 2017
+
+clone_depth: 40
+
+skip_tags: true
+
 build_script:
     - mkdir build.%BDIR%
     - cd build.%BDIR%
