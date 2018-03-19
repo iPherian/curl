@@ -4,7 +4,7 @@ environment:
     matrix:
       - PRJ_GEN: "Visual Studio 15 2017"
         BDIR: msvc2017
-        VS_VER: 15
+        VSVER: 15
         ARCH: x86
         PRJ_CFG: Release
         OPENSSL: OFF
