@@ -19,15 +19,18 @@ clone_depth: 40
 skip_tags: true
 
 before_build:
+    - ps: echo $env:CUSTOM_OPENSSL_DIST
     - ps: $env:REPLACE_OPENSSL_ROOT="C:\OpenSSL-Win32"
     - ps: >-
         If ($env:CUSTOM_OPENSSL_DIST -NotMatch "") {
+            echo "replacing openssl with $env:CUSTOM_OPENSSL_DIST"
             download_to_loc="$env:APPVEYOR_BUILD_FOLDER\_custom_openssl.zip"
             Remove-Item -Recurse $env:REPLACE_OPENSSL_ROOT
             New-Item -ItemType directory -Path $env:REPLACE_OPENSSL_ROOT
             Invoke-WebRequest $env:CUSTOM_OPENSSL_DIST -OutFile $download_to_loc
             7z e $download_to_loc "-o$env:REPLACE_OPENSSL_ROOT"
         }
+    - call dir "%REPLACE_OPENSSL_ROOT%"
 
 build_script:
     - mkdir build.%BDIR%
