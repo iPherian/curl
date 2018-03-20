@@ -54,7 +54,7 @@ after_build:
           robocopy ("build."+$env:BDIR+"\src\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\bin") "*" $robocopy_opts
           robocopy ("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\lib") "*" $robocopy_opts
           Set-Location -Path $env:RELEASE_MIN_DIR
-          $env:RELEASE_MIN_FILENAME=($env:APPVEYOR_REPO_BRANCH+"-"+$env:PRJ_CFG+"-"+$env:ARCH+"-vc"+$env:VSVER+"-build_"+$env:APPVEYOR_BUILD_VERSION)
+          $env:RELEASE_MIN_FILENAME=($env:APPVEYOR_REPO_BRANCH+"-"+$env:PRJ_CFG+"-"+$env:ARCH+"-vc"+$env:VSVER+"-build_"+$env:APPVEYOR_BUILD_VERSION+".zip")
           7z a ($env:APPVEYOR_BUILD_FOLDER+"\"+$env:RELEASE_MIN_FILENAME) "*"
           Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
         }
