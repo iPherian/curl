@@ -52,12 +52,12 @@ build_script:
 test_script:
     - cd "build.%BDIR%\tests\libtest\%PRJ_CFG%"
     - ps: >-
-        If(1) {
+        If($env:TESTING -Match "ON") {
           Get-ChildItem "." -Filter *.exe |
             Foreach-Object {
               cmd.exe /c $_.FullName
               If ($lastExitCode -NotMatch 0) {
-                throw "Test failed with exit code $lastExitCode: $_.FullName"
+                throw ("Test failed with exit code ${lastExitCode}: "+$_.FullName)
               }
             }
         }
