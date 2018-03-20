@@ -50,8 +50,17 @@ build_script:
     - cmake --build . --config %PRJ_CFG% --clean-first
 
 test_script:
-    - cd build.%BDIR%
-    - ctest
+    - cd "build.%BDIR%\tests\libtest\%PRJ_CFG%"
+    - ps: >-
+        If(1) {
+          Get-ChildItem "." -Filter *.exe |
+            Foreach-Object {
+              cmd.exe /c $_.FullName
+              If ($lastExitCode -NotMatch 0) {
+                throw "Test failed with exit code $lastExitCode: $_.FullName"
+              }
+            }
+        }
 
 after_build:
     - ps: >-
