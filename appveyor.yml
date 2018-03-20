@@ -49,6 +49,9 @@ build_script:
     - cmake .. -G"%PRJ_GEN%" -DCMAKE_USE_OPENSSL=%OPENSSL% -DCURL_STATICLIB=%STATICLIB% -DBUILD_TESTING=%TESTING% -DCURL_WERROR=ON
     - cmake --build . --config %PRJ_CFG% --clean-first
 
+test_script:
+    - cmake --build . --target RUN_TESTS --config %PRJ_CFG%
+
 after_build:
     - ps: >-
         If (1) {
