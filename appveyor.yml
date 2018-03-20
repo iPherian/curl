@@ -50,6 +50,7 @@ build_script:
     - cmake --build . --config %PRJ_CFG% --clean-first
 
 test_script:
+    - cd build.%BDIR%
     - cmake --build . --target RUN_TESTS --config %PRJ_CFG%
 
 after_build:
