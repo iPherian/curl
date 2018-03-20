@@ -50,9 +50,19 @@ after_build:
           New-Item -ItemType directory -Path $env:RELEASE_MIN_DIR
           New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\bin")
           New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\lib")
+          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\exp")
           $robocopy_opts=@('/COPYALL', '/E', '/FP', '/NP')
-          robocopy ("build."+$env:BDIR+"\src\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\bin") "*" $robocopy_opts
-          robocopy ("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\lib") "*" $robocopy_opts
+          $build_out_dir_one=("build."+$env:BDIR+"\src\"+$env:PRJ_CFG)
+          $build_out_dir_two=("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG)
+          # into <archive_root>/bin goes the exe and anything required to run it
+          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
+          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
+          # into <archive_root>/lib goes the implibs
+          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
+          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
+          # into <archive_root>/exp goes the export descriptions for the libraries
+          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
+          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
           Set-Location -Path $env:RELEASE_MIN_DIR
           $env:RELEASE_MIN_FILENAME=($env:APPVEYOR_REPO_BRANCH+"-"+$env:PRJ_CFG+"-"+$env:ARCH+"-vc"+$env:VSVER+"-build_"+$env:APPVEYOR_BUILD_VERSION+".zip")
           7z a ($env:APPVEYOR_BUILD_FOLDER+"\"+$env:RELEASE_MIN_FILENAME) "*"
