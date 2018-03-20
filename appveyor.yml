@@ -8,7 +8,7 @@ environment:
         ARCH: x86
         PRJ_CFG: Release
         OPENSSL: ON
-        TESTING: OFF
+        TESTING: ON
         STATICLIB: OFF
         CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.35/OpenSSL_1_0_2-stable-plain-x86-vc15-build_1.0.35.zip"
       - PRJ_GEN: "Visual Studio 15 2017 Win64"
@@ -17,7 +17,7 @@ environment:
         ARCH: x64
         PRJ_CFG: Release
         OPENSSL: ON
-        TESTING: OFF
+        TESTING: ON
         STATICLIB: OFF
         CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.35/OpenSSL_1_0_2-stable-plain-x64-vc15-build_1.0.35.zip"
 
