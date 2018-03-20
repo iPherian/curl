@@ -43,6 +43,7 @@ build_script:
 after_build:
     - ps: >-
         If (1) {
+          Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
           $release_dir="tmp_release"
           New-Item -ItemType directory -Path $release_dir
           $env:RELEASE_MIN_DIR=($release_dir+"\min")
