@@ -42,7 +42,7 @@ build_script:
 
 after_build:
     - ps: >-
-        {
+        If (1) {
           $release_dir="tmp_release"
           New-Item -ItemType directory -Path $release_dir
           $env:RELEASE_MIN_DIR=($release_dir+"\min")
