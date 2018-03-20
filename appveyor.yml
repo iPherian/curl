@@ -40,8 +40,27 @@ build_script:
     - cmake .. -G"%PRJ_GEN%" -DCMAKE_USE_OPENSSL=%OPENSSL% -DCURL_STATICLIB=%STATICLIB% -DBUILD_TESTING=%TESTING% -DCURL_WERROR=ON
     - cmake --build . --config %PRJ_CFG% --clean-first
 
+after_build:
+    - ps: >-
+        {
+          $release_dir="tmp_release"
+          New-Item -ItemType directory -Path $release_dir
+          $env:RELEASE_MIN_DIR=($release_dir+"\min")
+          New-Item -ItemType directory -Path $env:RELEASE_MIN_DIR
+          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\bin")
+          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\lib")
+          $robocopy_opts=@('/COPYALL', '/E', '/FP', '/NP')
+          robocopy ("build."+$env:BDIR+"\src\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\bin") "*" $robocopy_opts
+          robocopy ("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG) ($env:RELEASE_MIN_DIR+"\lib") "*" $robocopy_opts
+          Set-Location -Path $env:RELEASE_MIN_DIR
+          $env:RELEASE_MIN_FILENAME=($env:APPVEYOR_REPO_BRANCH+"-"+$env:PRJ_CFG+"-"+$env:ARCH+"-vc"+$env:VSVER+"-build_"+$env:APPVEYOR_BUILD_VERSION)
+          7z a ($env:APPVEYOR_BUILD_FOLDER+"\"+$env:RELEASE_MIN_FILENAME) "*"
+          Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
+        }
+
 artifacts:
-    - path: 'build.$(BDIR)/lib/$(PRJ_CFG)'
-      name: '$(APPVEYOR_REPO_BRANCH)-$(PRJ_CFG)-$(ARCH)-vc$(VSVER)-build_$(APPVEYOR_BUILD_VERSION)'
+    - path: '$(RELEASE_MIN_FILENAME)'
+      name: '$(RELEASE_MIN_FILENAME)'
+      type: Zip
     - path: 'build.$(BDIR)'
       name: '$(APPVEYOR_REPO_BRANCH)-$(PRJ_CFG)-$(ARCH)-vc$(VSVER)-build_$(APPVEYOR_BUILD_VERSION)-all'
