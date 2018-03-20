@@ -51,7 +51,7 @@ build_script:
 
 test_script:
     - cd build.%BDIR%
-    - cmake --build . --target RUN_TESTS --config %PRJ_CFG%
+    - ctest
 
 after_build:
     - ps: >-
