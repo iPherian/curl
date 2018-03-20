@@ -50,9 +50,9 @@ build_script:
     - cmake --build . --config %PRJ_CFG% --clean-first
 
 test_script:
-    - cd "build.%BDIR%\tests\libtest\%PRJ_CFG%"
     - ps: >-
         If($env:TESTING -Match "ON") {
+          Set-Location -Path ($env:APPVEYOR_BUILD_FOLDER+"\build."+$env:BDIR+"\tests\libtest\"+$env:PRJ_CFG)
           Get-ChildItem "." -Filter *.exe |
             Foreach-Object {
               cmd.exe /c $_.FullName
