@@ -22,7 +22,7 @@ before_build:
     - ps: echo $env:CUSTOM_OPENSSL_DIST
     - ps: $env:REPLACE_OPENSSL_ROOT="C:\OpenSSL-Win32"
     - ps: >-
-        If ($env:CUSTOM_OPENSSL_DIST -NotMatch "") {
+        If (Test-Path env:CUSTOM_OPENSSL_DIST) {
             echo "replacing openssl with $env:CUSTOM_OPENSSL_DIST"
             download_to_loc="$env:APPVEYOR_BUILD_FOLDER\_custom_openssl.zip"
             Remove-Item -Recurse $env:REPLACE_OPENSSL_ROOT
