@@ -7,8 +7,8 @@ environment:
         VSVER: 15
         ARCH: x86
         PRJ_CFG: Release
-        OPENSSL: OFF
-        TESTING: ON
+        OPENSSL: ON
+        TESTING: OFF
         STATICLIB: OFF
 
 image: Visual Studio 2017
