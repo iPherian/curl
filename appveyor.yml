@@ -28,7 +28,7 @@ before_build:
             Remove-Item -Recurse $env:REPLACE_OPENSSL_ROOT
             New-Item -ItemType directory -Path $env:REPLACE_OPENSSL_ROOT
             Invoke-WebRequest $env:CUSTOM_OPENSSL_DIST -OutFile $download_to_loc
-            7z e $download_to_loc "-o$env:REPLACE_OPENSSL_ROOT"
+            7z x $download_to_loc "-o$env:REPLACE_OPENSSL_ROOT"
         }
     - call dir "%REPLACE_OPENSSL_ROOT%"
 
