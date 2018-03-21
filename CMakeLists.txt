@@ -668,7 +668,9 @@ elseif(CURL_CA_PATH_AUTODETECT OR CURL_CA_BUNDLE_AUTODETECT)
             /etc/pki/tls/certs/ca-bundle.crt
             /usr/share/ssl/certs/ca-bundle.crt
             /usr/local/share/certs/ca-root-nss.crt
-            /etc/ssl/cert.pem)
+            /etc/ssl/cert.pem
+            C:/etc/ssl/cert.pem
+            )
 
         foreach(SEARCH_CA_BUNDLE_PATH ${SEARCH_CA_BUNDLE_PATHS})
             if(EXISTS "${SEARCH_CA_BUNDLE_PATH}")
@@ -681,10 +683,18 @@ elseif(CURL_CA_PATH_AUTODETECT OR CURL_CA_BUNDLE_AUTODETECT)
     endif()
 
     if(CURL_CA_PATH_AUTODETECT AND (NOT CURL_CA_PATH_SET))
-        if(EXISTS "/etc/ssl/certs")
-            set(CURL_CA_PATH "/etc/ssl/certs")
-            set(CURL_CA_PATH_SET TRUE CACHE BOOL "Path to the CA bundle has been set")
-        endif()
+        set(SEARCH_CA_PATH_PATHS
+            /etc/ssl/certs
+            C:/etc/ssl/certs
+            )
+        foreach(SEARCH_CA_PATH_PATH ${SEARCH_CA_PATH_PATHS})
+            if(EXISTS "${SEARCH_CA_PATH_PATH}")
+                message(STATUS "Found CA path: ${SEARCH_CA_PATH_PATH}")
+                set(CURL_CA_PATH "${SEARCH_CA_PATH_PATH}")
+                set(CURL_CA_PATH_SET TRUE CACHE BOOL "Path to the CA bundle has been set")
+                break()
+            endif()
+        endforeach()
     endif()
 endif()
 
@@ -694,6 +704,10 @@ if(CURL_CA_PATH_SET AND NOT USE_OPENSSL AND NOT USE_MBEDTLS)
             "Set CURL_CA_PATH=none or enable one of those TLS backends.")
 endif()
 
+message(STATUS "curl cert related vars:")
+message(STATUS "CURL_CA_BUNDLE: '${CURL_CA_BUNDLE}'")
+message(STATUS "CURL_CA_PATH: '${CURL_CA_PATH}'")
+message(STATUS "CURL_CA_FALLBACK: '${CURL_CA_FALLBACK}'")
 
 # Check for header files
 if(NOT UNIX)
