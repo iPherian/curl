@@ -1,6 +1,8 @@
 version: 7.50.0.{build}
 
 environment:
+    CURL_CA_BUNDLE: none
+    CURL_CA_PATH: none
     matrix:
       - PRJ_GEN: "Visual Studio 15 2017"
         BDIR: msvc2017
@@ -46,7 +48,7 @@ before_build:
 build_script:
     - mkdir build.%BDIR%
     - cd build.%BDIR%
-    - cmake .. -G"%PRJ_GEN%" -DCMAKE_USE_OPENSSL=%OPENSSL% -DCURL_STATICLIB=%STATICLIB% -DBUILD_TESTING=%TESTING% -DCURL_WERROR=ON
+    - cmake .. -G"%PRJ_GEN%" -DCMAKE_USE_OPENSSL=%OPENSSL% -DCURL_STATICLIB=%STATICLIB% -DBUILD_TESTING=%TESTING% -DCURL_WERROR=ON -DCURL_CA_BUNDLE:STRING=%CURL_CA_BUNDLE% -DCURL_CA_PATH:STRING=%CURL_CA_PATH%
     - cmake --build . --config %PRJ_CFG% --clean-first
 
 test_script:
