@@ -30,6 +30,8 @@ clone_depth: 40
 skip_tags: true
 
 before_build:
+    - echo ENV CURL_CA_BUNDLE=%CURL_CA_BUNDLE%
+    - echo ENV CURL_CA_PATH=%CURL_CA_PATH%
     - ps: echo $env:CUSTOM_OPENSSL_DIST
     - ps: $env:REPLACE_OPENSSL_ROOT="C:\OpenSSL-Win32"
     - call dir C:\
