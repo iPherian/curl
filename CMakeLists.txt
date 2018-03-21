@@ -669,7 +669,6 @@ elseif(CURL_CA_PATH_AUTODETECT OR CURL_CA_BUNDLE_AUTODETECT)
             /usr/share/ssl/certs/ca-bundle.crt
             /usr/local/share/certs/ca-root-nss.crt
             /etc/ssl/cert.pem
-            C:/etc/ssl/cert.pem
             )
 
         foreach(SEARCH_CA_BUNDLE_PATH ${SEARCH_CA_BUNDLE_PATHS})
@@ -685,7 +684,6 @@ elseif(CURL_CA_PATH_AUTODETECT OR CURL_CA_BUNDLE_AUTODETECT)
     if(CURL_CA_PATH_AUTODETECT AND (NOT CURL_CA_PATH_SET))
         set(SEARCH_CA_PATH_PATHS
             /etc/ssl/certs
-            C:/etc/ssl/certs
             )
         foreach(SEARCH_CA_PATH_PATH ${SEARCH_CA_PATH_PATHS})
             if(EXISTS "${SEARCH_CA_PATH_PATH}")
