@@ -93,18 +93,20 @@ after_build:
           }
           make_release_min_dir "" "\bin" "\lib" "\exp" "\include"
           $robocopy_opts=@('/COPYALL', '/E', '/FP', '/NP')
-          $build_out_dir_one=("build."+$env:BDIR+"\src\"+$env:PRJ_CFG)
-          $build_out_dir_two=("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG)
+          $build_out_dir_main=("build."+$env:BDIR+"\src\"+$env:PRJ_CFG)
+          $build_out_dir_lib=("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG)
           $orig_include_dir=($env:APPVEYOR_BUILD_FOLDER+"\include")
           # into <archive_root>/bin goes the exe and anything required to run it
-          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
-          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
+          robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
+          robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\bin") "*.pdb" $robocopy_opts
+          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
           # into <archive_root>/lib goes the implibs
-          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
-          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
+          robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
+          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
+          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\lib") "*.pdb" $robocopy_opts
           # into <archive_root>/exp goes the export descriptions for the libraries
-          robocopy $build_out_dir_one ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
-          robocopy $build_out_dir_two ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
+          robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
+          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
           # into <archive_root>/include goes the include files
           robocopy $orig_include_dir ($env:RELEASE_MIN_DIR+"\include") "*.h" $robocopy_opts
           Set-Location -Path $env:RELEASE_MIN_DIR
