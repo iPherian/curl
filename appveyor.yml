@@ -86,11 +86,12 @@ after_build:
           $release_dir="tmp_release"
           New-Item -ItemType directory -Path $release_dir
           $env:RELEASE_MIN_DIR=($release_dir+"\min")
-          New-Item -ItemType directory -Path $env:RELEASE_MIN_DIR
-          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\bin")
-          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\lib")
-          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\exp")
-          New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+"\include")
+          function make_release_min_dir {
+            Foreach ( $rel_path in $args ) {
+          		New-Item -ItemType directory -Path ($env:RELEASE_MIN_DIR+$rel_path)
+          	}
+          }
+          make_release_min_dir "" "\bin" "\lib" "\exp" "\include"
           $robocopy_opts=@('/COPYALL', '/E', '/FP', '/NP')
           $build_out_dir_one=("build."+$env:BDIR+"\src\"+$env:PRJ_CFG)
           $build_out_dir_two=("build."+$env:BDIR+"\lib\"+$env:PRJ_CFG)
