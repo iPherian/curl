@@ -100,10 +100,10 @@ after_build:
           robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
           robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\bin") "*.pdb" $robocopy_opts
           robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\bin") "*.dll" "*.exe" $robocopy_opts
+          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\bin") "*.pdb" $robocopy_opts
           # into <archive_root>/lib goes the implibs
           robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
           robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\lib") "*.lib" $robocopy_opts
-          robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\lib") "*.pdb" $robocopy_opts
           # into <archive_root>/exp goes the export descriptions for the libraries
           robocopy $build_out_dir_main ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
           robocopy $build_out_dir_lib ($env:RELEASE_MIN_DIR+"\exp") "*.exp" $robocopy_opts
