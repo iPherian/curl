@@ -20,15 +20,6 @@ environment:
         TESTING: OFF
         STATICLIB: OFF
         CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.43/OpenSSL_1_0_2-stable-plain-release-x64-vc15-build_1.0.43.zip"
-      - PRJ_GEN: "Visual Studio 15 2017"
-        BDIR: msvc2017
-        VSVER: 15
-        ARCH: x86
-        PRJ_CFG: Release
-        OPENSSL: ON
-        TESTING: OFF
-        STATICLIB: OFF
-        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.35/OpenSSL_1_0_2-stable-plain-x86-vc15-build_1.0.35.zip"
 
 image: Visual Studio 2017
 
