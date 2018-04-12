@@ -10,7 +10,7 @@ environment:
         OPENSSL: ON
         TESTING: OFF
         STATICLIB: OFF
-        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.44/OpenSSL_1_0_2-stable-plain-debug-x64-vc15-build_1.0.44.zip"
+        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_1_0-stable-build_1.0.52/OpenSSL_1_1_0-stable-shared-debug-x64-vc15-build_1.0.52.zip"
       - PRJ_GEN: "Visual Studio 15 2017 Win64"
         BDIR: msvc2017
         VSVER: 15
@@ -19,7 +19,7 @@ environment:
         OPENSSL: ON
         TESTING: OFF
         STATICLIB: OFF
-        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_0_2-stable-build_1.0.44/OpenSSL_1_0_2-stable-plain-release-x64-vc15-build_1.0.44.zip"
+        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_1_0-stable-build_1.0.52/OpenSSL_1_1_0-stable-shared-release-x64-vc15-build_1.0.52.zip"
 
 image: Visual Studio 2017
 
