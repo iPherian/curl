@@ -2,32 +2,26 @@ version: 7.50.0.{build}
 
 environment:
     matrix:
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
+      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 9 2008"
-        PRJ_CFG: Release
-        OPENSSL: OFF
-        WINSSL: ON
-        HTTP_ONLY: OFF
-        TESTING: OFF
-        SHARED: ON
-        DISABLED_TESTS: ""
-        COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 16 2019"
+        VSVER: 15
+        PRJ_GEN: "Visual Studio 15 2017"
+        ARCH: x64
         TARGET: "-A x64"
         PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: ON
+        OPENSSL: ON
+        WINSSL: OFF
         HTTP_ONLY: OFF
         TESTING: ON
-        SHARED: OFF
+        SHARED: ON
         DISABLED_TESTS: "!1139"
         COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
+        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_1_1-stable-build_1.0.56/OpenSSL_1_1_1-stable-shared-debug-x64-vc15-build_1.0.56.zip"
+      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 16 2019"
+        VSVER: 15
+        PRJ_GEN: "Visual Studio 15 2017"
+        ARCH: x64
         TARGET: "-A x64"
         PRJ_CFG: Release
         OPENSSL: ON
@@ -37,122 +31,45 @@ environment:
         SHARED: ON
         DISABLED_TESTS: ""
         COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 10 2010 Win64"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: OFF
-        HTTP_ONLY: OFF
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!1139"
-        COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 16 2019"
-        TARGET: "-A x64"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: OFF
-        HTTP_ONLY: OFF
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!1139"
-        COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 16 2019"
-        TARGET: "-A x64"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: OFF
-        HTTP_ONLY: ON
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!1139"
-        COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "MSYS Makefiles"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: OFF
-        HTTP_ONLY: OFF
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!198 !1139"
-        COMPILER_PATH: "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin"
-        MSYS2_ARG_CONV_EXCL: "/*"
-        BUILD_OPT: -k
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "MSYS Makefiles"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: ON
-        HTTP_ONLY: OFF
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!1139"
-        COMPILER_PATH: "C:\\mingw-w64\\i686-6.3.0-posix-dwarf-rt_v5-rev1\\mingw32\\bin"
-        MSYS2_ARG_CONV_EXCL: "/*"
-        BUILD_OPT: -k
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "MSYS Makefiles"
-        PRJ_CFG: Debug
-        OPENSSL: OFF
-        WINSSL: OFF
-        HTTP_ONLY: OFF
-        TESTING: ON
-        SHARED: OFF
-        DISABLED_TESTS: "!1139"
-        COMPILER_PATH: "C:\\MinGW\\bin"
-        MSYS2_ARG_CONV_EXCL: "/*"
-        BUILD_OPT: -k
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: winbuild_vs2015
-        DEBUG: yes
-        PATHPART: debug
-        TESTING: OFF
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: winbuild_vs2015
-        DEBUG: no
-        PATHPART: release
-        TESTING: OFF
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
-        BUILD_SYSTEM: winbuild_vs2017
-        DEBUG: yes
-        PATHPART: debug
-        TESTING: OFF
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
-        BUILD_SYSTEM: winbuild_vs2017
-        DEBUG: no
-        PATHPART: release
-        TESTING: OFF
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
-        BUILD_SYSTEM: VisualStudioSolution
-        PRJ_CFG: "DLL Debug - DLL Windows SSPI - DLL WinIDN"
-        TESTING: OFF
-        VC_VERSION: VC15
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
-        BUILD_SYSTEM: CMake
-        PRJ_GEN: "Visual Studio 16 2019"
-        TARGET: "-A ARM64"
-        PRJ_CFG: Release
-        OPENSSL: OFF
-        WINSSL: ON
-        HTTP_ONLY: OFF
-        TESTING: OFF
-        SHARED: OFF
-        DISABLED_TESTS: ""
-        COMPILER_PATH: ""
-      - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
-        BUILD_SYSTEM: autotools
-        TESTING: ON
-        DISABLED_TESTS: "!19 !1056 !1233 !1242 !1243 !2002 !2003"
-        CONFIG_ARGS: "--enable-debug --enable-werror --enable-alt-svc --disable-threaded-resolver --disable-proxy"
+        CUSTOM_OPENSSL_DIST: "https://github.com/iPherian/openssl/releases/download/OpenSSL_1_1_1-stable-build_1.0.56/OpenSSL_1_1_1-stable-shared-release-x64-vc15-build_1.0.56.zip"
+        
+clone_depth: 40
+
+skip_tags: true
+
+before_build:
+    - ps: >-
+        If (1) {
+          # create certificate paths
+          New-Item -ItemType directory -Path "C:\etc"
+          New-Item -ItemType directory -Path "C:\etc\ssl"
+          New-Item -ItemType directory -Path "C:\etc\ssl\certs"
+          Invoke-WebRequest "https://curl.haxx.se/ca/cacert.pem" -OutFile "C:\etc\ssl\cert.pem"
+        }
+    - ps: >-
+        If (1) {
+            Remove-Item -Recurse "C:\OpenSSL-Win32"
+            Remove-Item -Recurse "C:\OpenSSL-Win64"
+            If ($env:TARGET -Match "x64") {
+                $env:REPLACE_OPENSSL_ROOT="C:\OpenSSL-Win64"
+            } Else {
+                $env:REPLACE_OPENSSL_ROOT="C:\OpenSSL-Win32"
+            }
+            Remove-Item -Recurse $env:REPLACE_OPENSSL_ROOT
+        }
+    - call dir C:\
+    - ps: >-
+        If (1) {
+          # test if CUSTOM_OPENSSL_DIST env var has been set
+          If ( ($env:OPENSSL -Match "ON") -and (Test-Path env:CUSTOM_OPENSSL_DIST) ) {
+              echo "replacing openssl with $env:CUSTOM_OPENSSL_DIST"
+              $download_to_loc="$env:APPVEYOR_BUILD_FOLDER\_custom_openssl.zip"
+              New-Item -ItemType directory -Path $env:REPLACE_OPENSSL_ROOT
+              Invoke-WebRequest $env:CUSTOM_OPENSSL_DIST -OutFile $download_to_loc
+              7z x $download_to_loc "-o$env:REPLACE_OPENSSL_ROOT"
+          }
+        }
+    - call dir "%REPLACE_OPENSSL_ROOT%"
 
 install:
     - set "PATH=C:\msys64\usr\bin;%PATH%"
@@ -204,15 +121,18 @@ build_script:
 test_script:
     - if %TESTING%==ON (
         bash.exe -e -l -c "cd /c/projects/curl/tests && ./runtests.pl -a -p !flaky %DISABLED_TESTS%" )
-
-# whitelist branches to avoid testing feature branches twice (as branch and as pull request)
-branches:
-    only:
-        - master
-        - /\/ci$/
+        
+after_build:
+    - ps: >-
+        If (1) {
+        
+        
+        }
 
 artifacts:
   - path: '**/curl.exe'
     name: curl
   - path: '**/libcurl.dll'
     name: libcurl
+  - path: '.'
+    name: '$(APPVEYOR_REPO_BRANCH)-$(PRJ_CFG)-$(ARCH)-vc$(VSVER)-build_$(APPVEYOR_BUILD_VERSION)-all'
