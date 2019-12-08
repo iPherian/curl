@@ -179,12 +179,12 @@ artifacts:
     - path: '$(RELEASE_MIN_FILENAME)'
       name: '$(RELEASE_MIN_FILENAME)'
       type: Zip
-    - path: '**/curl.exe'
-      name: curl
-    - path: '**/libcurl.dll'
-      name: libcurl
-    - path: '**/libcurl-d.dll'
-      name: libcurl-d
+    #- path: '**/curl.exe'
+    #  name: curl
+    #- path: '**/libcurl.dll'
+    #  name: libcurl
+    #- path: '**/libcurl-d.dll'
+    #  name: libcurl-d
     #- path: 'src'
     #  name: '$(RELEASE_MIN_BASENAME)-src-all'
     #- path: 'lib'
